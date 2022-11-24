@@ -1,3 +1,3 @@
-# Ejercicios-CPP
+# Ejercicios
 
 Solo programas sencillos.
