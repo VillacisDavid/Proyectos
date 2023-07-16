@@ -1,3 +1,1 @@
-# Ejercicios
-
-Solo programas sencillos.
+# Repositorio de Proyectos
