@@ -34,3 +34,4 @@
 #files 
 .vscode/
 freeglut/
+.ipynb_checkpoints/
