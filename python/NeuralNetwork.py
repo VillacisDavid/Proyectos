@@ -69,7 +69,6 @@ class rn_multicapa:
         Layers[0]+=1  
         # cantidad de capas ocultas de la rn
         n_capasOcultas = len(Layers)-2
-        print(n_capasOcultas)
         # Inicializar las capas ocultas, segun lo especificado en Layers
         for idx,layer in enumerate(Layers[1:-1]):
             # almacena una capa temporalmente antes de agregarla a hiddenLayers
