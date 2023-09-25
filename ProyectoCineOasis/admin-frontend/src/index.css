@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+
+@layer components {
+    .navbar-icon{
+        @apply relative flex items-center justify-center
+        h-14 w-14 mt-1 mb-1 mx-auto hover:bg-blue-400
+        text-gray-300;
+    }
+
+    .title-text{
+        @apply relative flex items-center justify-start mx-10
+        text-3xl text-gray-200;
+    }
+
+    .navbar-links{
+        @apply relative flex items-center justify-center text-gray-200;
+    }
+
+    .navlink-item{
+        @apply relative flex items-center justify-center h-14 w-28 mx-auto
+    }
+   
+}
+
+@tailwind utilities;
