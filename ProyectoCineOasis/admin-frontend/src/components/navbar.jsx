@@ -1,7 +1,11 @@
 import { BiMenu } from "react-icons/bi";
 import { CiUser } from "react-icons/ci";
+import { useState } from "react";
 
 const Navbar = () => {
+
+    const [color, setColor] = useState("red");
+
     return (
         <div className="fixed w-screen h-16 flex flex-col  bg-blue-700 "> 
             <div className="grid grid-cols-12 lg:mx-52">
