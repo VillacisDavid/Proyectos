@@ -20,7 +20,14 @@
     .navlink-item{
         @apply relative flex items-center justify-center h-14 w-28 mx-auto
     }
-   
+
+    .section-container{
+        @apply relative mt-2 mb-2 mx-auto w-screen h-20 bg-slate-600
+    }
+
+    .aside-container{
+        @apply relative mt-2 mb-2 mx-auto w-auto h-auto bg-slate-600
+    }
 }
 
 @tailwind utilities;
