@@ -1,40 +1,48 @@
 import { BiMenu } from "react-icons/bi";
 import { CiUser } from "react-icons/ci";
-import { useState } from "react";
 
 const Navbar = () => {
 
-    const [color, setColor] = useState("red");
-
     return (
-        <div className="fixed w-screen h-16 flex flex-col  bg-blue-700 "> 
-            <div className="grid grid-cols-12 lg:mx-52">
+        <div className="navbar-container"> 
+
+            <div className="flex justify-start">
                 <NavbarIcon icon={ <BiMenu size="24" /> } id={"sidemenu"} />
                 <Title />
                 <NavLinks />
-                <NavbarIcon icon={ <CiUser size="24" /> } id={"usermenu"} />
-            </div>              
+            </div>
+
+            <div className="flex justify-end">
+                <NavbarIcon icon={ <CiUser size="24" /> } id={"usermenu"} />  
+            </div>
+                       
         </div>
     );
 };
 
-const NavbarIcon = ({ icon }, { id }) => ( <button className="navbar-icon" type="button" onClick={() => mostrarOpciones({id})}>{icon}</button>);
+const NavbarIcon = ({ icon }) => ( 
+    <div className="navbar-icon">
+        <button type="button" onClick={() => mostrarOpciones({id})}>{icon}</button>
+    </div>
+);
 
-function mostrarOpciones(id){
-    
-}
-
-const Title = () => ( <h1 className='title-text col-span-5'>Cine<span class="text-orange-600">Oasis</span></h1> );
+const Title = () => ( 
+    <div className='navbar-title'>
+        <h1>Cine<span className="text-orange-600">Oasis</span></h1>
+    </div>
+);
 
 const NavLinks  = () => ( 
-    <div className="invisible sm:visible navbar-links col-span-5">
-        <ul className="grid grid-cols-4">
-            <li className="navlink-item"><a href="/">Dashboard</a></li>
-            <li className="navlink-item"><a href="/">Peliculas</a></li>
-            <li className="navlink-item"><a href="/">Funciones</a></li>
-            <li className="navlink-item"><a href="/">Reportes</a></li>
+    <div className="navbar-links">
+        <ul class="flex w-80 justify-evenly">
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/">Peliculas</a></li>
+            <li><a href="/">Funciones</a></li>
+            <li><a href="/">Reportes</a></li>
         </ul>
     </div>
+    
+    
     
 );
 

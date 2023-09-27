@@ -5,7 +5,7 @@ import Dashboard from './components/dashboard'
 function App() {
 
   return (
-    <div className="flex flex-row">
+    <div className="flex-col">
       <Navbar />
       <Dashboard />
     </div>
