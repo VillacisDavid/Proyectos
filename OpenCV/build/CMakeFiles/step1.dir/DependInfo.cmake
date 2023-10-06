@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/david/proyectos/opencv/source/step1.cpp" "CMakeFiles/step1.dir/step1.cpp.o" "gcc" "CMakeFiles/step1.dir/step1.cpp.o.d"
+  "/home/david/proyectos/OpenCV/source/step1.cpp" "CMakeFiles/step1.dir/step1.cpp.o" "gcc" "CMakeFiles/step1.dir/step1.cpp.o.d"
   )
 
 # Targets to which this target links.
