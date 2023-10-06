@@ -9,9 +9,9 @@
 
 #include<iostream>
 #include<vector>
-#include<opencv4/opencv2/core.hpp>
-#include<opencv4/opencv2/imgproc.hpp>
-#include<opencv4/opencv2/imgcodecs.hpp>
+#include<opencv2/core.hpp>
+#include<opencv2/imgproc.hpp>
+#include<opencv2/imgcodecs.hpp>
 #include<opencv2/highgui.hpp>
 #include<omp.h>
 
@@ -73,8 +73,9 @@ int main(int argc, char** argv){
 
 	for(int i = 0; i<bloques.size();i++)
 	{
-		cv::imwrite(cv::format("./imagenes/%i.jpg",i), bloques[i]);
+		cv::imshow(cv::format("./imagenes/%i.jpg",i), bloques[i]);
 	}
+	cv::waitKey();
 	/* Tarea 3: Aplicar filtros en paralelo */
 	inicio_filtro = omp_get_wtime();
 
