@@ -1,3 +1,0 @@
-/home/david/proyectos/OpenCV/build/CMakeFiles/step1.dir
-/home/david/proyectos/OpenCV/build/CMakeFiles/edit_cache.dir
-/home/david/proyectos/OpenCV/build/CMakeFiles/rebuild_cache.dir
