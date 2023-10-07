@@ -48,6 +48,41 @@ std::vector<cv::Mat> dividirImagen(cv::Mat image, int COLS, int ROWS){
 	return bloques;
 }
 
+cv::Mat unirBloques(std::vector<cv::Mat> bloques, int COLS, int ROWS)
+{
+	int idx=0;
+	cv::Mat imagen, tmp2,tmp4,tmp8;
+	std::vector<cv::Mat> sub_8blq;
+	std::vector<cv::Mat> sub_4blq;
+	std::vector<cv::Mat> sub_2blq;
+
+
+	for (int i = 0; i < 16; i+=2)
+	{
+		tmp2 = cv::Mat();
+		cv::hconcat(bloques[i], bloques[i+1],tmp2);
+		sub_2blq.push_back(tmp2);
+	}
+
+	for (int i = 0; i < 8; i+=2)
+	{
+		tmp4 = cv::Mat();
+		cv::hconcat(sub_2blq[i], sub_2blq[i+1],tmp4);
+		sub_4blq.push_back(tmp4);
+	}
+
+	for (int i = 0; i < 4; i+=2)
+	{
+		tmp8 = cv::Mat();
+		cv::vconcat(sub_4blq[i], sub_4blq[i+1],tmp8);
+		sub_8blq.push_back(tmp8);
+	}
+	
+	cv::vconcat(sub_8blq[0],sub_8blq[1],imagen);
+	
+	return imagen;
+}
+
 int main(int argc, char** argv){
 
 	// Inicializacion de variables
@@ -71,40 +106,49 @@ int main(int argc, char** argv){
 	/* Tarea 2: Dividir la imagen */
 	std::vector<cv::Mat> bloques = dividirImagen(image, COL_BLOQUES, ROW_BLOQUES);
 
-	for(int i = 0; i<bloques.size();i++)
-	{
-		cv::imshow(cv::format("./imagenes/%i.jpg",i), bloques[i]);
-	}
-	cv::waitKey();
 	/* Tarea 3: Aplicar filtros en paralelo */
 	inicio_filtro = omp_get_wtime();
 
 	// Creando kernels para filtros
 	std::vector<cv::Mat>kernels;
 
-	// Kernel "identidad"
-	kernels.push_back( (cv::Mat_<double>(3,3)<< 0,0,0,0,1,0,0,0,0) );
-	// Kernel Blur
-	cv::Mat krn_blur = cv::Mat::ones(5,5, CV_64F);
-	krn_blur = krn_blur / 25;
-	kernels.push_back( krn_blur );
-	// Kernel 
-	kernels.push_back( (cv::Mat_<double>(3,3)<< 0,0,0,0,1,0,0,0,0) );
-	// Kernel 	
-	kernels.push_back( (cv::Mat_<double>(3,3)<< 0,0,0,0,1,0,0,0,0) );
+	float kernels_filtros[16][9] = {
+		{0,0,0,0,1,0,0,0,0},	// Filtro 1
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1}, // Filtro 2
+		{0,-1,0,-1,5,-1,0,-1,0}, // Filtro 3
+		{-1,-1,-1,-1,9,-1,-1,-1,-1}, // Filtro 4
+		{0,-0.025,0,0,0.25,0,0,0.025,0}, // Filtro 5
+		{0.-025,0,0,-0.025,0,0,-0.25,0,0}, // Filtro 6
+		{0,0,0.04,0,0,0.7,0,0,0.04}, // Filtro 7
+		{0.04,0.04,0.04,0.04,0.04,0.04,0.04,0.04,0.04}, // Filtro 8
+		{0.1,0.5,0.1,0.5,0.15,0.5,0.1,0.5,0.1}, // Filtro 9
+		{-1, 0, 1, -2, 0, 2, -1, 0, 1}, // Filtro 10
+		{1020,0,-1020,1020,0,-1020,1020,0,-1020	}, // Filtro 11
+		{0,0,0,0,1,0,0,0,0}, // Filtro 12
+		{0,-1,0,-1,5,-1,0,-1,0}, // Filtro 13
+		{0.1,0.5,0.1,0.5,0.15,0.5,0.1,0.5,0.1}, // Filtro 14
+		{1020,1020,1020,0,0,0,-1020,-1020,-1020}, // Filtro 15
+		{255,0,-255,255,0,-255,255,0,-255}, // Filtro 16
+	};
 	
-	// Apply identity filter using kernel
- 
-    // Blurred using kernel
-    // Initialize matrix with all ones
-    cv::Mat kernel2 = cv::Mat::ones(5,5, CV_64F);
-    // Normalize the elements
-    kernel2 = kernel2 / 25;
-    cv::Mat img;
-    cv::filter2D(image, img, -1 , kernel2, cv::Point(-1, -1), 0, 4);
-    cv::imwrite("./imagenes/blur_kernel.jpg", img);
+	for(int i=0; i<COL_BLOQUES*ROW_BLOQUES; i++)
+	{
+		kernels.push_back(cv::Mat(3,3,CV_32F,kernels_filtros[i]));
+	}
 
-	/* Tarea 4: Calcular tiempos de ejecucion */
+	// Aplicar filtros
+	std::vector<cv::Mat>bloques_filtrados(16);
+
+	for(int i = 0; i<bloques.size();i++)
+	{
+	    cv::filter2D(bloques[i], bloques_filtrados[i], -1 , kernels[i], cv::Point2d(-1,-1),0.0);
+	}
+
+	/* Tarea 4: Juntar los bloques en una sola imagen */
+	cv::Mat imagen_multifiltro = unirBloques(bloques_filtrados, COL_BLOQUES, ROW_BLOQUES);
+	cv::imwrite("./imagenes/producto.jpg", imagen_multifiltro);
+
+	/* Tarea 5: Calcular tiempos de ejecucion */
 
 	// Calculo del tiempo de filtro
 	fin_filtro = omp_get_wtime() - inicio_filtro;
