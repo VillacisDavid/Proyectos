@@ -86,6 +86,7 @@ cv::Mat unirBloques(std::vector<cv::Mat> bloques, int COLS, int ROWS)
 int main(int argc, char** argv){
 
 	// Inicializacion de variables
+	cv::String img_file = "./imagenes/test3.jpg";
 	double inicio_ejecucion, tiempo_ejecucion;
 	double inicio_filtro, fin_filtro;
 	const int COL_BLOQUES = 4;
@@ -95,7 +96,7 @@ int main(int argc, char** argv){
 	inicio_ejecucion = omp_get_wtime();
 
 	/* Tarea 1:  Cargar la imagen */
-	cv::Mat image = cv::imread("./imagenes/test.jpg");
+	cv::Mat image = cv::imread(img_file);
 
     // Mensaje de error si no se encuentra la imagen
     if (image.empty()) 
