@@ -1,19 +1,17 @@
-import { BiMovie } from "react-icons/bi";
-
 const Dashboard = () => {
 
     return (
-        <div className="dashboard-container">
-            <div className="mx-1 my-1">
-                <div className="my-1">
+        <div className="flex relative max-w-6xl mx-auto text-textlight">
+            <div className="relative w-2/3 mx-1">
+                <div className="my-2 py-2 bg-gray-200 rounded-sm">
                     <Sec_Funciones />
                 </div>
-                <div className="my-1">
+                <div className="my-2 py-2 bg-gray-200 rounded-sm">
                     <Sec_Reportes />
                 </div>
             </div>
-            <div className="mr-2 my-2">
-                <div>
+            <div className="relative w-1/3 mx-1">
+                <div className="my-2 py-2 bg-gray-200 rounded-sm">
                     <Sec_Peliculas />
                 </div>
                 
@@ -26,41 +24,51 @@ const Dashboard = () => {
 };
 
 const Sec_Funciones = () => (
-    <div className="section-container">
-        <div className="section-title">Funciones programadas</div>
+    <div className="relative">
+        <div className="flex items-center h-10 mx-1.5 px-2
+        shadow-sm rounded-sm bg-gray-100 font-semibold"> 
+            <h1>Funciones programadas </h1>            
+        </div>
+        <div>
+            <div>Esta semana</div>
+            <ul>
+                <li>Funcion 1</li>
+                <li>Funcion 2</li>
+                <li>Funcion 3</li>
+            </ul>
+        </div>
         
     </div>
 );
     
 
 const Sec_Reportes = () => (
-    <div className="section-container">
-        <div className="section-title">Reporte de Ventas</div>
+    <div className="relative">
+        <div className="flex items-center h-10 mx-1.5 px-2  
+        shadow-sm rounded-sm bg-gray-100 font-semibold">
+            <h1>Reporte de Ventas</h1>
+        </div>
+
+        <div>
+            <div>reporte</div>
+        </div>
     </div>
 );
 
 const Sec_Peliculas = () => (
-    <div className="aside-container">
-        <div className="section-title">Peliculas disponibles</div>
-        <div className="section-content">
+    <div className="relative">
+        <div className="flex items-center h-10 mx-1.5 px-2  
+        shadow-sm rounded-sm bg-gray-100 font-semibold">
+            <div className="">Peliculas disponibles</div>
+        </div>
             <ul className="flex-row items-center">
-                <li><Movie icon={ <BiMovie size="24" /> } title={"Pelicula 1"} status={"Mostrandose"} /></li>
-                <li><Movie icon={ <BiMovie size="24" /> } title={"Pelicula 2"} status={"Pre estreno"} /></li>
-                <li><Movie icon={ <BiMovie size="24" /> } title={"Pelicula 3"} status={"Proximamente"} /></li>
+                <ul>
+                    <li>Pelicula 1</li>
+                    <li>Pelicula 2</li>
+                    <li>Pelicula 3</li>
+                </ul>
             </ul>
-        </div>
     </div>
-);
-
-const Movie = ({ icon, title, status}) => (
-    <div className="flex items-center mx-2">
-        <div className="flex items-center justify-center h-10 w-10 mx-1 my-1 bg-white">
-            {icon}
-        </div>
-        <div> {title} </div>
-        <div className="ml-2"> +{status} </div>
-    </div>
-        
 );
 
 export default Dashboard;
