@@ -30,15 +30,15 @@ const NavbarIcon = ({ icon }) => (
 
 const Title = () => ( 
     <div className='navbar-title'>
-        <Link to="/">Cine<span className="text-orange-600">Oasis</span></Link>
+        <Link to="/">Cine<span className="text-orange">Oasis</span></Link>
     </div>
 );
 
 const NavLinks  = () => ( 
     <div className="navbar-links">
         <ul class="flex w-80 justify-evenly">
-            <li><Link to="/peliculas">Peliculas</Link></li>
             <li><Link to="/funciones">Funciones</Link></li>
+            <li><Link to="/peliculas">Peliculas</Link></li>
             <li><Link to="/reportes">Reportes</Link></li>
         </ul>
     </div>
